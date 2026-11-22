@@ -5,7 +5,13 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const TEXT =
-  "Nothing after this sentence is a question, and nothing here needs an answer. In the pocket of the coat by the door, a smooth stone is still warm from the hand that held it last. Some things are kept simply because they were once held. For a little while, so are you.";
+  "In the pocket of the coat by the door, a smooth stone is still warm from the hand that held it last. Some things are kept for no reason except that a hand once closed around them. Nothing here is asking anything of you. For a little while, you are held too.";
+
+if (TEXT.length === 0 || [...TEXT].length > 280) {
+  throw new Error(
+    `entry text must be 1-280 code points, got ${[...TEXT].length}`,
+  );
+}
 
 const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
 mkdirSync(outDir, { recursive: true });
